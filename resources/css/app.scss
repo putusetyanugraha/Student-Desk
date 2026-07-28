@@ -1,0 +1,385 @@
+// A cohesive, accessible palette used throughout the application.
+$primary: #1d4ed8;
+$secondary: #0f766e;
+$info: #0e7490;
+$success: #15803d;
+$danger: #b42318;
+$warning: #f59e0b;
+$light: #f8fafc;
+$dark: #102a43;
+$body-bg: #f1f5f9;
+$body-color: #1e293b;
+$border-radius: .85rem;
+$border-radius-lg: 1.1rem;
+$border-radius-sm: .6rem;
+
+@import 'bootstrap/scss/bootstrap';
+
+body {
+    min-height: 100vh;
+    background: $body-bg;
+}
+
+.navbar-app {
+    padding: .75rem 0;
+    color: #fff;
+    background: linear-gradient(110deg, $primary, $info);
+    box-shadow: 0 .35rem 1.25rem rgba(15, 23, 42, .16);
+}
+
+.dashboard-navbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.navbar-brand-app {
+    display: inline-flex;
+    gap: .7rem;
+    align-items: center;
+    color: #fff;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.navbar-brand-app:hover {
+    color: #fff;
+}
+
+.brand-mark {
+    display: grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    place-items: center;
+    color: $primary;
+    background: #fff;
+    border-radius: .7rem;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.navbar-brand-app small {
+    display: block;
+    margin-top: .2rem;
+    color: rgba(255, 255, 255, .75);
+    font-size: .72rem;
+}
+
+.dashboard-nav {
+    display: flex;
+    gap: .25rem;
+    align-items: center;
+    margin-right: auto;
+}
+
+.dashboard-nav__link {
+    padding: .55rem .8rem;
+    color: rgba(255, 255, 255, .82);
+    border-radius: .55rem;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-nav__link:hover,
+.dashboard-nav__link--active {
+    color: #fff;
+    background: rgba(255, 255, 255, .16);
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+}
+
+.language-switch {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+}
+
+.language-switch span {
+    color: rgba(255, 255, 255, .65);
+    font-size: .85rem;
+    font-weight: 600;
+    transition: all .25s ease;
+    user-select: none;
+}
+
+.language-switch span.active {
+    color: #fff;
+    font-weight: 700;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.2rem;
+    height: 1.7rem;
+}
+
+.switch input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .25);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 999px;
+    transition: .3s ease;
+}
+
+.slider::before {
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    width: 1.2rem;
+    height: 1.2rem;
+    content: "";
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    transition: .3s ease;
+}
+
+.switch input:checked + .slider {
+    background: $secondary;
+    border-color: $secondary;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(1.5rem);
+}
+
+.switch:hover .slider {
+    filter: brightness(1.08);
+}
+
+.nav-action {
+    min-width: 6.5rem;
+}
+
+.page-shell {
+    max-width: 76rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    margin: 0;
+    color: $dark;
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+
+.page-subtitle {
+    margin: .35rem 0 0;
+    color: #64748b;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 .5rem 1.5rem rgba(15, 23, 42, .08);
+}
+
+.form-card {
+    width: 100%;
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.content-card {
+    padding: 1.5rem;
+}
+
+.form-control,
+.form-select {
+    min-height: 2.8rem;
+    border-color: #cbd5e1;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 .2rem rgba(29, 78, 216, .15);
+}
+
+.btn {
+    font-weight: 600;
+}
+
+.form-actions {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1.75rem;
+}
+
+.data-card {
+    overflow: hidden;
+}
+
+.data-card .table {
+    margin-bottom: 0;
+}
+
+.data-card thead th {
+    padding: 1rem;
+    color: #fff;
+    background: $dark;
+    border: 0;
+    font-size: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.data-card tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.data-card a:not(.btn) {
+    color: $primary;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.data-card a:not(.btn):hover {
+    text-decoration: underline;
+}
+
+.auth-page {
+    min-height: 100vh;
+    background: #eaf1ff;
+}
+
+.login-visual {
+    // Change these values anytime to adjust the image, overlay, crop, or focal point.
+    --login-visual-image: url('https://freddds-project.web.app/assets/DSC04011.webp');
+    --login-visual-overlay: transparent;
+    // Use `cover` to fill the panel. Adjust the position (for example: left center)
+    // when the main subject of a new photo is not centered.
+    --login-visual-size: cover;
+    --login-visual-position: center;
+    --login-visual-rotation: -90deg;
+
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+    background-color: #eaf1ff;
+    overflow: hidden;
+}
+
+.login-visual::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vh;
+    height: 50vw;
+    content: '';
+    background-image: var(--login-visual-image);
+    background-position: var(--login-visual-position);
+    background-repeat: no-repeat;
+    background-size: var(--login-visual-size);
+    transform: translate(-50%, -50%) rotate(var(--login-visual-rotation));
+}
+
+.login-visual__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--login-visual-overlay);
+}
+
+.login-visual__content {
+    position: relative;
+    z-index: 2;
+    align-self: flex-end;
+    max-width: 34rem;
+    padding: 3rem;
+}
+
+.auth-card {
+    width: min(100%, 26rem);
+    padding: 2rem;
+}
+
+.auth-card__title {
+    margin-bottom: .35rem;
+    color: $dark;
+    font-weight: 700;
+}
+
+.auth-card__subtitle {
+    margin-bottom: 1.75rem;
+    color: #64748b;
+}
+
+.detail-summary {
+    border-left: .35rem solid $info;
+}
+
+.status-value {
+    color: $primary;
+    font-weight: 700;
+}
+
+
+@media (max-width: 575.98px) {
+    .dashboard-navbar {
+        align-items: flex-start;
+    }
+
+    .dashboard-nav {
+        order: 3;
+        width: 100%;
+    }
+
+    .dashboard-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .page-shell {
+        padding-top: 1.5rem;
+    }
+
+    .nav-action {
+        min-width: auto;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+    }
+
+    .form-card,
+    .content-card {
+        padding: 1.25rem;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .form-actions .btn {
+        flex: 1;
+    }
+}
