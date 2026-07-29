@@ -9,11 +9,19 @@
         </a>
 
         <div class="dashboard-nav">
-            <a href="{{ route('home') }}"
-                class="dashboard-nav__link {{ request()->routeIs('home', 'students.*') ? 'dashboard-nav__link--active' : '' }}">{{ __('main.nav.students') }}</a>
+
+            @auth
+
+                <span class="dashboard-user">
+                    {{ Auth::user()->name }}
+                </span>
+
+            @endauth
+
         </div>
 
         <div class="dashboard-actions">
+
             <div class="language-switch">
                 <span class="{{ app()->getLocale() == 'id' ? 'active' : '' }}">ID</span>
 
@@ -26,8 +34,30 @@
 
                 <span class="{{ app()->getLocale() == 'en' ? 'active' : '' }}">EN</span>
             </div>
-            <a href="{{ route('login.view') }}" class="btn btn-light nav-action">{{ __('main.login') }}</a>
-            <a href="{{ route('register.view') }}" class="btn btn-secondary nav-action">{{ __('main.register') }}</a>
+
+            @guest
+
+                <a href="{{ route('login') }}" class="btn btn-light nav-action">
+                    {{ __('main.login') }}
+                </a>
+
+                <a href="{{ route('register.view') }}" class="btn btn-secondary nav-action">
+                    {{ __('main.register') }}
+                </a>
+
+            @endguest
+
+            @auth
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-danger nav-action">
+                        Logout
+                    </button>
+                </form>
+
+            @endauth
+
         </div>
     </div>
 </nav>

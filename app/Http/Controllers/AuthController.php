@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function redirectToLogin()
     {
-        return redirect()->route('login.view');
+        return redirect()->route('login');
     }
 
     public function showLogin()
@@ -27,43 +28,69 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validated = $request->validate([
-            'username' => 'required|email',
-            'password' => 'required|string',
+            'email' => ['required', 'email'],
+            'password' => ['required']
         ]);
 
-        $credentials = [
-            'email'    => $validated['username'],
-            'password' => $validated['password'],
-        ];
+        if (Auth::attempt($validated)) {
 
-        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
             return redirect()->route('home');
         }
 
-        return back()->withInput($request->only('username'))->withErrors([
-            'username' => 'Username atau password salah.',
-        ]);
+        return back()
+            ->withInput()
+            ->with(
+                'error_messages',
+                __('auth.failed')
+            );
     }
 
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'username' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed',
-                            Password::min(8)
-                                ->mixedCase()
-                                ->symbols()
-                                ->numbers()
-            ],
+            'name' => ['required', 'min:3', 'max:50'],
+
+            'email' => ['required', 'email', 'unique:users,email'],
+
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(3)
+                    ->max(20)
+                    ->mixedCase()
+                    ->symbols(),
+            ]
         ]);
 
-        User::create([
-            'name'     => $validated['username'],
-            'email'    => $validated['username'],
-            'password' => $validated['password'], // otomatis di-hash krn cast 'hashed' di model
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('login.view')->with('status', 'Registrasi berhasil, silakan login.');
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+
+    // public function val(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'total_students' => ['different:class'],
+    //         'class_date' => ['after:today']
+    //     ]);
+    // }
 }

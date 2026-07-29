@@ -14,7 +14,7 @@ return [
     "auth" => [
         "login_subtitle" => "Welcome back. Please enter your account details.",
         "register_subtitle" => "Create an account to get started.",
-        "username" => "Username",
+        "email" => "Email",
         "password" => "Password",
         "confirm_password" => "Confirm Password",
         "no_account" => "Don't have an account?",

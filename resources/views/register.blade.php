@@ -17,13 +17,15 @@
                     <form action="{{ route('register.do') }}" method="POST">
                         @csrf
                         <div class="my-2">
-                            <label for="">{{ __('main.auth.username') }}</label>
-                            <input type="text" name="username" id="" class="form-control"
-                                value="{{ old('username') }}">
+                            <label>Name</label>
+
+                            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                         </div>
+
                         <div class="my-2">
-                            <label for="">{{ __('main.auth.password') }}</label>
-                            <input type="password" name="password" id="" class="form-control">
+                            <label>Email</label>
+
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
                         </div>
                         <div class="my-2">
                             <label for="">{{ __('main.auth.confirm_password') }}</label>
@@ -34,7 +36,7 @@
                     </form>
                     <p class="mt-3 text-center text-muted">
                         {{ __('main.auth.have_account') }}
-                        <a href="{{ route('login.view') }}" class="text-primary text-decoration-underline fw-semibold">
+                        <a href="{{ route('login') }}" class="text-primary text-decoration-underline fw-semibold">
                             {{ __('main.auth.login_here') }}
                         </a>
                     </p>

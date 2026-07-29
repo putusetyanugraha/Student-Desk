@@ -17,9 +17,9 @@
                     <form action="{{ route('login.do') }}" method="POST">
                         @csrf
                         <div class="my-2">
-                            <label for="username">{{ __('main.auth.username') }}</label>
-                            <input type="text" name="username" id="" class="form-control"
-                                value="{{ old('username') }}">
+                            <label for="Email">{{ __('main.auth.email') }}</label>
+                            <input type="text" name="email" id="" class="form-control"
+                                value="{{ old('email') }}">
                         </div>
 
                         <div class="my-2">

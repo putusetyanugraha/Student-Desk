@@ -14,7 +14,7 @@ return [
     "auth" => [
         "login_subtitle" => "Selamat datang kembali. Silakan masukkan detail akunmu.",
         "register_subtitle" => "Buat akun untuk mulai menggunakan aplikasi.",
-        "username" => "Username",
+        "email" => "Email",
         "password" => "Kata Sandi",
         "confirm_password" => "Konfirmasi Kata Sandi",
         "no_account" => "Belum punya akun?",
