@@ -3,14 +3,14 @@
         <a href="{{ route('home') }}" class="navbar-brand-app">
             <img src="/images/gradu-cap.ico" alt="Student Desk Logo" class="brand-logo">
             <span>
-                <strong>Student Desk</strong>
-                <small>Academic dashboard</small>
+                <strong>{{ __('main.nav.brand') }}</strong>
+                <small>{{ __('main.nav.brand_subtitle') }}</small>
             </span>
         </a>
-        
+
         <div class="dashboard-nav">
             <a href="{{ route('home') }}"
-                class="dashboard-nav__link {{ request()->routeIs('home', 'students.*') ? 'dashboard-nav__link--active' : '' }}">Students</a>
+                class="dashboard-nav__link {{ request()->routeIs('home', 'students.*') ? 'dashboard-nav__link--active' : '' }}">{{ __('main.nav.students') }}</a>
         </div>
 
         <div class="dashboard-actions">

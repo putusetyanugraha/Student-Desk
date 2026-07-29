@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Login')
+@section('title', __('main.login'))
 @section('content')
     <div class="container-fluid p-0 auth-page">
         <div class="row g-0 min-vh-100">
-            <div class="col-lg-6 login-visual d-none d-lg-flex">
+            <div class="col-lg-6 login-visual d-none d-lg-flex"
+                style="--login-visual-image: url('https://freddds-project.web.app/assets/DSC04011.webp')">
                 <div class="login-visual__overlay"></div>
                 <div class="login-visual__content">
                 </div>
@@ -12,17 +13,17 @@
             <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center p-4">
                 <div class="card auth-card">
                     <h2 class="auth-card__title">{{ __('main.login') }}</h2>
-                    <p class="auth-card__subtitle">Welcome back. Please enter your account details.</p>
+                    <p class="auth-card__subtitle">{{ __('main.auth.login_subtitle') }}</p>
                     <form action="{{ route('login.do') }}" method="POST">
                         @csrf
                         <div class="my-2">
-                            <label for="username">Username</label>
+                            <label for="username">{{ __('main.auth.username') }}</label>
                             <input type="text" name="username" id="" class="form-control"
                                 value="{{ old('username') }}">
                         </div>
 
                         <div class="my-2">
-                            <label for="password">Password</label>
+                            <label for="password">{{ __('main.auth.password') }}</label>
                             <input type="password" name="password" id="" class="form-control">
                         </div>
 
@@ -47,9 +48,9 @@
                         <button class="mt-2 btn btn-primary w-100" type="submit">{{ __('main.login') }}</button>
                     </form>
                     <p class="mt-3 text-center text-muted">
-                        Don't have an account?
+                        {{ __('main.auth.no_account') }}
                         <a href="{{ route('register.view') }}" class="text-primary text-decoration-underline fw-semibold">
-                            Register here
+                            {{ __('main.auth.register_here') }}
                         </a>
                     </p>
                 </div>

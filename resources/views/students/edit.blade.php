@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Student')
+@section('title', __('main.student.edit_title'))
 @section('content')
     @include('layouts.navbar')
     <main class="container page-shell">

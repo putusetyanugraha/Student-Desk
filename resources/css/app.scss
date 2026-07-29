@@ -1,4 +1,4 @@
-// A cohesive, accessible palette used throughout the application.
+// Variables
 $primary: #1d4ed8;
 $secondary: #0f766e;
 $info: #0e7490;
@@ -9,17 +9,21 @@ $light: #f8fafc;
 $dark: #102a43;
 $body-bg: #f1f5f9;
 $body-color: #1e293b;
+$muted-text: #64748b;
+$border-color: #cbd5e1;
 $border-radius: .85rem;
 $border-radius-lg: 1.1rem;
 $border-radius-sm: .6rem;
 
 @import 'bootstrap/scss/bootstrap';
 
+// Base
 body {
     min-height: 100vh;
     background: $body-bg;
 }
 
+// Navbar
 .navbar-app {
     padding: .75rem 0;
     color: #fff;
@@ -94,6 +98,7 @@ body {
     align-items: center;
 }
 
+// Language switch
 .language-switch {
     display: flex;
     align-items: center;
@@ -166,6 +171,7 @@ body {
     min-width: 6.5rem;
 }
 
+// Page layout
 .page-shell {
     max-width: 76rem;
     padding-top: 2rem;
@@ -190,9 +196,10 @@ body {
 
 .page-subtitle {
     margin: .35rem 0 0;
-    color: #64748b;
+    color: $muted-text;
 }
 
+// Cards & forms
 .card {
     border: 0;
     box-shadow: 0 .5rem 1.5rem rgba(15, 23, 42, .08);
@@ -212,7 +219,7 @@ body {
 .form-control,
 .form-select {
     min-height: 2.8rem;
-    border-color: #cbd5e1;
+    border-color: $border-color;
 }
 
 .form-control:focus,
@@ -233,6 +240,7 @@ body {
     margin-top: 1.75rem;
 }
 
+// Data table
 .data-card {
     overflow: hidden;
 }
@@ -266,17 +274,14 @@ body {
     text-decoration: underline;
 }
 
+// Auth pages
 .auth-page {
     min-height: 100vh;
     background: #eaf1ff;
 }
 
 .login-visual {
-    // Change these values anytime to adjust the image, overlay, crop, or focal point.
-    --login-visual-image: url('https://freddds-project.web.app/assets/DSC04011.webp');
     --login-visual-overlay: transparent;
-    // Use `cover` to fill the panel. Adjust the position (for example: left center)
-    // when the main subject of a new photo is not centered.
     --login-visual-size: cover;
     --login-visual-position: center;
     --login-visual-rotation: -90deg;
@@ -330,7 +335,7 @@ body {
 
 .auth-card__subtitle {
     margin-bottom: 1.75rem;
-    color: #64748b;
+    color: $muted-text;
 }
 
 .detail-summary {
@@ -342,7 +347,7 @@ body {
     font-weight: 700;
 }
 
-
+// Responsive
 @media (max-width: 575.98px) {
     .dashboard-navbar {
         align-items: flex-start;

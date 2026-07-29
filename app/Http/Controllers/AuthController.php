@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -24,40 +26,44 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validated = $request->validate(
-        [
+        $validated = $request->validate([
             'username' => 'required|email',
-            'password' => ['required', 'min:3', 'max:20',
-                            Password::min(3) 
-                                ->max(20)
-                                ->mixedCase()
-                                ->symbols()
-                            ],
+            'password' => 'required|string',
         ]);
 
-        return redirect()->route('home');
+        $credentials = [
+            'email'    => $validated['username'],
+            'password' => $validated['password'],
+        ];
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('home');
+        }
+
+        return back()->withInput($request->only('username'))->withErrors([
+            'username' => 'Username atau password salah.',
+        ]);
     }
 
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'username' => ['required', 'email'],
+            'username' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'confirmed',
-                            Password::min(3)
-                            ->max(20)
-                            ->mixedCase()
-                            ->symbols()
-            ]
+                            Password::min(8)
+                                ->mixedCase()
+                                ->symbols()
+                                ->numbers()
+            ],
         ]);
 
-        return redirect()->route('home');
-    }
+        User::create([
+            'name'     => $validated['username'],
+            'email'    => $validated['username'],
+            'password' => $validated['password'], // otomatis di-hash krn cast 'hashed' di model
+        ]);
 
-    // public function val(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'total_students' => ['different:class'],
-    //         'class_date' => ['after:today']
-    //     ]);
-    // }
+        return redirect()->route('login.view')->with('status', 'Registrasi berhasil, silakan login.');
+    }
 }

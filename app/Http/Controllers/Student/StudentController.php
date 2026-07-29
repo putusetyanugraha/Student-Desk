@@ -62,7 +62,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'student_name' => ['required'],
-            'student_nim' => ['required', 'numeric', 'unique:students,nim']
+            'student_nim' => ['required', 'numeric', 'unique:students,nim,' . $id]
         ]);
 
         $new_name = $validated['student_name'];
@@ -101,6 +101,20 @@ class StudentController extends Controller
             $student->delete();
 
             return redirect()->route('home');
+        }
+
+        return back();
+    }
+
+    public function scoreDelete(string $scoreId)
+    {
+        $score = Scores::where('id', $scoreId)->first();
+
+        if ($score) {
+            $student_id = $score->student_id;
+            $score->delete();
+
+            return redirect()->route('students.detail', $student_id);
         }
 
         return back();

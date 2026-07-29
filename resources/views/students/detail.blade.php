@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Student')
+@section('title', __('main.student.detail_title'))
 @section('content')
     @include('layouts.navbar')
     <main class="container page-shell">
@@ -15,8 +15,8 @@
         <div class="card detail-summary">
             <div class="card-body">
                 <h2 class="h4 mb-2">{{$data->name}}</h2>
-                <p class="text-secondary mb-3">Student Number: {{$data->nim}}</p>
-                <p class="mb-3">Prediction: <span class="status-value">{{blank($data->prediction) ? '-' : ($data->prediction ? 'Telat' : 'Tepat Waktu')}}</span></p>
+                <p class="text-secondary mb-3">{{ __('main.student.nim_label') }} {{$data->nim}}</p>
+                <p class="mb-3">Prediction: <span class="status-value">{{blank($data->prediction) ? '-' : ($data->prediction ? 'Terlambat' : 'Tepat Waktu')}}</span></p>
                 <form action="{{ route('students.predict', $data->id) }}" method="POST">
                     @csrf
                     <button class="btn btn-sm btn-info" type="submit">Predict Status</button>
@@ -97,7 +97,7 @@
                                 } else if ($score->score >= 75 && $score->score <= 79) {
                                     $grade = 'B';
                                 } else {
-                                    $grade = 'Kacaw!';
+                                    $grade = '🚩';
                                 }
                             @endphp
                         <tr>
@@ -108,7 +108,14 @@
                             <td>{{$score->final_exam}}</td>
                             <td>{{$score->score}}</td>
                             <td>{{$grade}}</td>
-                            <td></td>
+                            <td>
+                                <form action="{{ route('students.scores.delete', $score->id) }}" method="POST" class="d-inline"
+                                    onsubmit="return confirm('{{ __('main.home.delete_confirm') }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">{{ __('main.home.delete') }}</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

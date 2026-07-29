@@ -32,6 +32,7 @@ Route::prefix('students')->name('students.')->controller(StudentController::clas
     Route::get('create', 'showCreate')->name('create');
     Route::post('create', 'insertStudent')->name('insert');
     Route::post('score/insert', 'insertScore')->name('scores.insert');
+    Route::delete('score/delete/{scoreId}', 'scoreDelete')->name('scores.delete');
     Route::post('predict/{id}', 'predictScore')->name('predict');
     Route::get('update/{id}', 'showEdit')->name('edit');
     Route::patch('update/{id}', 'studentUpdate')->name('update');

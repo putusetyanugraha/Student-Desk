@@ -1,30 +1,30 @@
 @extends('layouts.master')
 
-@section('title', 'Homepage')
+@section('title', __('main.home.title'))
 @section('content')
     @include('layouts.navbar')
     <main class="container page-shell">
         <div class="page-header">
             <div>
-                <h1 class="page-title">Student Directory</h1>
-                <p class="page-subtitle">Monitor student records and academic performance.</p>
+                <h1 class="page-title">{{ __('main.home.title') }}</h1>
+                <p class="page-subtitle">{{ __('main.home.subtitle') }}</p>
             </div>
 
             <div class="d-flex gap-2">
 
                 <form action="{{ route('home') }}" method="GET" class="d-flex">
 
-                    <input type="text" name="search" class="form-control" placeholder="Search student..."
+                    <input type="text" name="search" class="form-control" placeholder="{{ __('main.home.search_placeholder') }}"
                         value="{{ request('search') }}">
 
                     <button class="btn btn-outline-primary ms-2">
-                        Search
+                        {{ __('main.home.search_button') }}
                     </button>
 
                 </form>
 
                 <a href="{{ route('students.create') }}" class="btn btn-primary">
-                    Add New Student
+                    {{ __('main.home.add_new') }}
                 </a>
 
             </div>
@@ -34,11 +34,11 @@
                 <table class="table table-hover align-middle">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Average Score</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>{{ __('main.home.col_no') }}</th>
+                            <th>{{ __('main.home.col_name') }}</th>
+                            <th>{{ __('main.home.col_average') }}</th>
+                            <th>{{ __('main.home.col_status') }}</th>
+                            <th>{{ __('main.home.col_action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,13 +61,13 @@
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('students.edit', $st->id) }}"
-                                            class="btn btn-sm btn-warning">Edit</a>
+                                            class="btn btn-sm btn-warning">{{ __('main.home.edit') }}</a>
                                         <form action="{{ route('students.delete', $st->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Delete student data?')">Delete</button>
+                                                onclick="return confirm('{{ __('main.home.delete_confirm') }}')">{{ __('main.home.delete') }}</button>
                                         </form>
                                     </div>
                                 </td>

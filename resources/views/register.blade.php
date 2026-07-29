@@ -1,40 +1,41 @@
 @extends('layouts.master')
 
-@section('title', 'Register')
+@section('title', __('main.register'))
 @section('content')
     <div class="container-fluid p-0 auth-page">
         <div class="row g-0 min-vh-100">
-            <div class="col-lg-6 login-visual d-none d-lg-flex">
+            <div class="col-lg-6 login-visual d-none d-lg-flex"
+                style="--login-visual-image: url('https://freddds-project.web.app/assets/DSC04011.webp')">
                 <div class="login-visual__overlay"></div>
                 <div class="login-visual__content">
                 </div>
             </div>
             <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center p-4">
                 <div class="card auth-card">
-                    <h2 class="auth-card__title">Register</h2>
-                    <p class="auth-card__subtitle">Create an account to get started.</p>
+                    <h2 class="auth-card__title">{{ __('main.register') }}</h2>
+                    <p class="auth-card__subtitle">{{ __('main.auth.register_subtitle') }}</p>
                     <form action="{{ route('register.do') }}" method="POST">
                         @csrf
                         <div class="my-2">
-                            <label for="">Username</label>
+                            <label for="">{{ __('main.auth.username') }}</label>
                             <input type="text" name="username" id="" class="form-control"
                                 value="{{ old('username') }}">
                         </div>
                         <div class="my-2">
-                            <label for="">Password</label>
+                            <label for="">{{ __('main.auth.password') }}</label>
                             <input type="password" name="password" id="" class="form-control">
                         </div>
                         <div class="my-2">
-                            <label for="">Confirm Password</label>
+                            <label for="">{{ __('main.auth.confirm_password') }}</label>
                             <input type="password" name="password_confirmation" id="" class="form-control">
                         </div>
                         @include('components.error_messages')
-                        <button type="submit" class="mt-2 btn btn-primary w-100">Register</button>
+                        <button type="submit" class="mt-2 btn btn-primary w-100">{{ __('main.register') }}</button>
                     </form>
                     <p class="mt-3 text-center text-muted">
-                        Already have an account?
+                        {{ __('main.auth.have_account') }}
                         <a href="{{ route('login.view') }}" class="text-primary text-decoration-underline fw-semibold">
-                            Login here
+                            {{ __('main.auth.login_here') }}
                         </a>
                     </p>
                 </div>
